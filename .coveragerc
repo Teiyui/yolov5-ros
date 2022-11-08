@@ -1,0 +1,5 @@
+[run]
+omit =
+    tests/conftest.py
+    setup.py
+    */dist-packages/*

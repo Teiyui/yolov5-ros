@@ -1,0 +1,50 @@
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Deploy
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# Documentation
+#   * Official
+#     * https://docs.gitlab.com/ee/ci/yaml/
+#     * https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+#
+#   * Japanese
+#     * https://gitlab-docs.creationline.com/ee/ci/yaml/README.html
+#
+# Table of Contents
+#   * pytest: https://github.com/pytest-dev/pytest
+#   * pytest-cov: https://github.com/pytest-dev/pytest-cov
+#
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Template Jobs
+#
+# ----------------------------------------------------------------------------------------------------------------------
+.deploy:
+  before_script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends git python3-pip
+
+# ----------------------------------------------------------
+#   Install from pip
+# ----------------------------------------------------------
+pip:
+  extends:
+    - .deploy
+  stage: Deploy
+  needs: []
+  script:
+    - pip3 install "git+${CI_PROJECT_URL}.git@${CI_COMMIT_SHA}"
+    - pip3 show $(python3 setup.py --name)
+
+# ----------------------------------------------------------
+#   Install from git clone and pip
+# ----------------------------------------------------------
+clone:
+  extends:
+    - .deploy
+  stage: Deploy
+  needs: []
+  script:
+    - pip3 install ./
+    - pip3 show $(python3 setup.py --name)

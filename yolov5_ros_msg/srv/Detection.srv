@@ -1,0 +1,6 @@
+# Define the request
+sensor_msgs/CompressedImage image
+
+---
+# Define the response
+yolov5_ros_msgs/BoundingBoxes boxes

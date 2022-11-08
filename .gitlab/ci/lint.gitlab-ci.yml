@@ -1,0 +1,97 @@
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Python Linter
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# Documentation
+#   * Official
+#     * https://docs.gitlab.com/ee/ci/yaml/
+#     * https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+#
+#   * Japanese
+#     * https://gitlab-docs.creationline.com/ee/ci/yaml/README.html
+#
+# Table of Contents
+#   * Python
+#     1. Style Checker
+#       * Flake8: https://github.com/PyCQA/flake8
+#     2. Formatter
+#       * Black: https://github.com/psf/black
+#       * isort: https://github.com/PyCQA/isort
+#     3. Security Checker
+#       * Bandit: https://github.com/PyCQA/bandit
+#     4. Type Checker
+#       * Pyright: https://github.com/microsoft/pyright#
+#
+# ----------------------------------------------------------
+#   Style Checker > flake8
+# ----------------------------------------------------------
+# https://github.com/pycqa/flake8
+flake8:
+  extends:
+    - .pip
+  stage: Lint
+  needs: []
+  script:
+    - pip3 install $(grep "flake8" ${REQUIREMENTS_TEST_TXT_PATH} | sed -z "s/\n/ /g")
+    - flake8 -v ./
+
+# ----------------------------------------------------------
+#   Formatter > Black
+# ----------------------------------------------------------
+# https://github.com/psf/black
+black:
+  extends:
+    - .pip
+  stage: Lint
+  needs: []
+  script:
+    - pip3 install "$(grep "black\[jupyter\]" ${REQUIREMENTS_TEST_TXT_PATH})"
+    - black --check ./
+
+# ----------------------------------------------------------
+#   Formatter > isort
+# ----------------------------------------------------------
+# https://github.com/PyCQA/isort
+isort:
+  extends:
+    - .pip
+  stage: Lint
+  needs: []
+  script:
+    - >
+      if [ -z $(which git) ]; then
+        apt-get update
+        apt-get install -y --no-install-recommends git;
+      fi
+    - pip3 install "$(grep "isort" ${REQUIREMENTS_TEST_TXT_PATH})"
+    - isort --check ./
+
+# ----------------------------------------------------------
+#   Security Checker > Bandit
+# ----------------------------------------------------------
+# https://github.com/PyCQA/bandit
+bandit:
+  extends:
+    - .pip
+  stage: Lint
+  needs: []
+  script:
+    - pip3 install "$(grep "bandit\[toml\]" ${REQUIREMENTS_TEST_TXT_PATH})"
+    - bandit -c pyproject.toml -r ./
+
+# ----------------------------------------------------------
+#   Type Checker > Pyright
+# ----------------------------------------------------------
+# https://github.com/microsoft/pyright
+pyright:
+  extends:
+    - .catkin_ws
+  stage: Lint
+  script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends python3-pip > /dev/null
+    - pip3 install -r "${REQUIREMENTS_TXT_PATH}"
+    - pip3 install "$(grep "pyright" ${REQUIREMENTS_TEST_TXT_PATH})"
+    - pip3 install $(grep "pytest" ${REQUIREMENTS_TEST_TXT_PATH} | sed -z "s/\n/ /g")
+    - pyright --warnings ./

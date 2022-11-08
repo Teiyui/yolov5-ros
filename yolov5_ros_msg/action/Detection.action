@@ -1,0 +1,9 @@
+# Define the goal
+sensor_msgs/CompressedImage image
+
+---
+# Define the result
+yolov5_ros_msgs/BoundingBoxes boxes
+
+---
+# Define a feedback message

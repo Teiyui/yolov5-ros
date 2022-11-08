@@ -1,0 +1,84 @@
+# ------------------------------------------------------------------------------------------------------------------
+#
+#   Black
+#
+# ------------------------------------------------------------------------------------------------------------------
+# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html?highlight=line-length#the-basics
+[tool.black]
+line-length = 120
+skip-string-normalization = 1
+target-version = ["py38"]
+extend-exclude = '''
+/(
+    submodules
+)/
+'''
+# ------------------------------------------------------------------------------------------------------------------
+#
+#   Pyright
+#
+# ------------------------------------------------------------------------------------------------------------------
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+[tool.pyright]
+venv = ".venv"
+pythonVersion = 3.8
+typeCheckingMode = "strict"
+
+# For undefined stub libraries
+reportMissingTypeStubs = "none"
+reportUnknownParameterType = "none"
+reportUnknownArgumentType = "none"
+reportUnknownLambdaType = "none"
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"
+
+# For more strict
+reportCallInDefaultInitializer = "error"
+reportImplicitStringConcatenation = "error"
+reportPropertyTypeMismatch = "error"
+reportUnusedCallResult = "error"
+#reportMissingSuperCall = "error"
+reportUnnecessaryTypeIgnoreComment = "error"
+
+# For torch.nn.Module.forward
+reportUninitializedInstanceVariable = "none"
+reportIncompatibleMethodOverride = "none"
+
+ignore = [
+    "**/tests/",
+    "**/submodules/",
+    "geometric_edge_detection_test/",
+]
+
+# ------------------------------------------------------------------------------------------------------------------
+#
+#   Isort
+#
+# ------------------------------------------------------------------------------------------------------------------
+# https://pycqa.github.io/isort/docs/configuration/options.html
+[tool.isort]
+profile = "black"
+line_length = 120
+skip_gitignore = true
+skip_glob = [
+    ".git/*",
+    "*/*submodules/*",
+]
+
+# ------------------------------------------------------------------------------------------------------------------
+#
+#   Bandit
+#
+# ------------------------------------------------------------------------------------------------------------------
+# https://bandit.readthedocs.io/en/latest/config.html
+[tool.bandit]
+exclude_dirs = [
+    ".venv/",
+    "submodules/",
+]
+skips = [
+    "B101", # assert_used
+    "B404", # import_subprocess
+    "B603", # subprocess_without_shell_equals_true
+    "B607", # B607: start_process_with_partial_path
+]

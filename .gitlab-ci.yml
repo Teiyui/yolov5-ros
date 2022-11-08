@@ -1,0 +1,71 @@
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Documentation
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# Documentation
+#   * Official
+#     * https://docs.gitlab.com/ee/ci/yaml/
+#     * https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+#
+#   * Japanese
+#     * https://gitlab-docs.creationline.com/ee/ci/yaml/README.html
+#
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Workflow
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# https://docs.gitlab.com/ee/ci/yaml/#workflow
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      variables:
+        VENV_CACHE_KEY: "${CI_PIPELINE_ID}-venv"
+      when: always
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: never
+    - when: always
+
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Default parameters
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# https://docs.gitlab.com/ee/ci/yaml/#default
+default:
+  image: osrf/ros:noetic-desktop-full
+
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Job Stages
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# https://docs.gitlab.com/ee/ci/yaml/#stages
+stages:
+  - Lint
+  - Test
+  - Deploy
+
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Variables
+#
+# ----------------------------------------------------------------------------------------------------------------------
+variables:
+  REQUIREMENTS_TXT_PATH: "requirements.txt"
+  REQUIREMENTS_TEST_TXT_PATH: "requirements_test.txt"
+  XENON_MAX_ABSOLUTE: "C"
+  XENON_MAX_MODULES: "C"
+  XENON_MAX_AVERAGE: "C"
+  JUPYTER_TEST_SHELL_PATH: ".tools/test-jupyter.sh"
+
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Include
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# https://docs.gitlab.com/ee/ci/yaml/#include
+include:
+  - local: .gitlab/ci/*.gitlab-ci.yml

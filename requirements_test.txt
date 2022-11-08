@@ -1,0 +1,29 @@
+# Jupyter Notebook
+notebook>=6.4.12
+matplotlib>=3.5.3
+
+# Style Checker
+flake8>=5.0.4
+# pydocstyle
+flake8-docstrings>=1.6.0
+
+# Formatter
+black[jupyter]>=22.6.0
+isort>=5.10.1
+docformatter>=1.5.0
+yamllint>=1.27.1
+
+# Metrics
+nbformat>=5.4.0
+radon>=5.1.0
+xenon>=0.9.0
+
+# Type Checker
+pyright>=1.1.266
+
+# Security Checker
+bandit[toml]>=1.7.4
+
+# Test
+pytest>=7.1.2
+pytest-cov>=3.0.0
