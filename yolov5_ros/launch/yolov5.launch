@@ -30,7 +30,7 @@
         <remap from="/input/image/compressed" to="$(arg input_image_topic)"/>
         <remap from="/input/activation" to="$(arg input_image_topic)"/>
         <remap from="/output/image/compressed" to="$(arg output_image_topic)"/>
-        <remap from="/output/bounding_boxes" to="$(arg output_bbox_topic)"/>
+        <remap from="/output/bboxes" to="$(arg output_bbox_topic)"/>
         <remap from="/service/detection" to="$(arg service_topic)"/>
         <remap from="/action/detection" to="$(arg action_topic)"/>
     </node>

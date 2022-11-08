@@ -4,7 +4,7 @@ from __future__ import annotations
 import time
 from threading import Lock
 from types import TracebackType
-from typing import Final, Type, cast
+from typing import Final, Type
 
 import cv2
 import numpy as np
@@ -94,7 +94,7 @@ class YoloV5Node:
         #   ROS Publisher
         # ------------------------------------------------ #
         self._image_publisher = Publisher("/output/image/compressed", CompressedImage, queue_size=1)
-        self._bboxes_publisher = Publisher("/output/bounding_boxes", BoundingBoxes, queue_size=1)
+        self._bboxes_publisher = Publisher("/output/bboxes", BoundingBoxes, queue_size=1)
 
         # ------------------------------------------------ #
         #   ROS Subscriber
@@ -111,11 +111,11 @@ class YoloV5Node:
     def _load_model(config_path: str, weight_path: str, device: torch.device) -> tuple[nn.Module, list[str]]:
         rospy.loginfo("Loading model ...")
 
-        empty_model = Model(cfg=config_path)
+        model = Model(cfg=config_path)
         load_pt = torch.load(weight_path)
         pretrain_model = load_pt["model"]
-        model = cast(nn.Module, empty_model.load_state_dict(pretrain_model.state_dict()))
-        model = model.to(torch.float16).to(device).eval()
+        _ = model.load_state_dict(pretrain_model.state_dict())
+        _ = model.to(torch.float16).to(device).eval()
 
         classes = pretrain_model.names
 
