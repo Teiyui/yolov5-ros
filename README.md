@@ -10,11 +10,9 @@
 #   Badge
 #
 # --------------------------------------------------------------------------------------------------------------------->
-[![pipeline status](https://gitlab.com/nenecchi-ws/ros/library/template/badges/main/pipeline.svg)](https://gitlab.com/nenecchi-ws/python/template/-/commits/main)
-[![coverage report](https://gitlab.com/nenecchi-ws/ros/library/template/badges/main/coverage.svg)](https://gitlab.com/nenecchi-ws/python/template/-/commits/main)
+[![pipeline status](https://gitlab.com/nenecchi-ws/ros/packages/yolov5-ros/badges/main/pipeline.svg)](https://gitlab.com/nenecchi-ws/ros/packages/yolov5-ros/-/commits/main)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Doc style: Google](https://img.shields.io/badge/%20style-google-3666d6.svg)](https://google.github.io/styleguide/pyguide.html)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 <!----------------------------------------------------------------------------------------------------------------------
 #
