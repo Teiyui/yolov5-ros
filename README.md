@@ -20,7 +20,8 @@
 #
 # --------------------------------------------------------------------------------------------------------------------->
 This is a ROS wrapper of [YOLO V5](https://github.com/ultralytics/yolov5) for Object Detection from Depth image.
-[//]: # (![Input Image]&#40;docs/image.png&#41;)
+
+![Input Image](docs/output.gif)
 
 <!----------------------------------------------------------------------------------------------------------------------
 #
