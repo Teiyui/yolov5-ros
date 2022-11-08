@@ -82,8 +82,14 @@ bash download.sh
 #
 # --------------------------------------------------------------------------------------------------------------------->
 ## Example
+weight: `yolov5m.pt`
 ```shell
 roslaunch yolov5_ros yolov5.launch rviz:=true
+```
+
+weight: `yolov5m_Objects365.pt`
+```shell
+roslaunch yolov5_ros yolov5_objects365.launch rviz:=true
 ```
 
 <!----------------------------------------------------------------------------------------------------------------------
