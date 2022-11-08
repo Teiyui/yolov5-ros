@@ -1,0 +1,42 @@
+# ----------------------------------------------------------------------------------------------------------------------
+#
+#   Build
+#
+# ----------------------------------------------------------------------------------------------------------------------
+# Documentation
+#   * Official
+#     * https://docs.gitlab.com/ee/ci/yaml/
+#     * https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+#
+#   * Japanese
+#     * https://gitlab-docs.creationline.com/ee/ci/yaml/README.html
+#
+# ----------------------------------------------------------
+#   Template Jobs
+# ----------------------------------------------------------
+.catkin_ws:
+  before_script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends python3-catkin-tools > /dev/null
+    - mkdir -p  ${CATKIN_WS_PATH}/src
+    - ln -s ${CI_PROJECT_DIR}  ${CATKIN_WS_PATH}/src/
+    - cd  ${CATKIN_WS_PATH}
+    - catkin build
+    - source  ${CATKIN_WS_PATH}/devel/setup.bash
+    - cd ${CI_PROJECT_DIR}
+    - ln -s /usr/bin/python3 /usr/bin/python
+  needs:
+    - catkin
+
+# ----------------------------------------------------------
+#   catkin build
+# ----------------------------------------------------------
+catkin:
+  stage: Build
+  script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends python3-catkin-tools > /dev/null
+    - mkdir -p  ${CATKIN_WS_PATH}/src
+    - ln -s ${CI_PROJECT_DIR}  ${CATKIN_WS_PATH}/src/
+    - cd  ${CATKIN_WS_PATH}
+    - catkin build

@@ -44,9 +44,9 @@ default:
 # ----------------------------------------------------------------------------------------------------------------------
 # https://docs.gitlab.com/ee/ci/yaml/#stages
 stages:
+  - Build
   - Lint
   - Test
-  - Deploy
 
 # ----------------------------------------------------------------------------------------------------------------------
 #
@@ -60,6 +60,8 @@ variables:
   XENON_MAX_MODULES: "C"
   XENON_MAX_AVERAGE: "C"
   JUPYTER_TEST_SHELL_PATH: ".tools/test-jupyter.sh"
+  GIT_SUBMODULE_STRATEGY: recursive
+  CATKIN_WS_PATH: /home/runner/catkin_ws
 
 # ----------------------------------------------------------------------------------------------------------------------
 #
