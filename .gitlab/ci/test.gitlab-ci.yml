@@ -26,5 +26,5 @@ roslaunch-pytest:
     - apt-get install -y --no-install-recommends python3-pip wget > /dev/null
     - pip3 install --upgrade --force-reinstall -r "${REQUIREMENTS_TXT_PATH}"
     - pip3 install $(grep "pytest" ${REQUIREMENTS_TEST_TXT_PATH} | sed -z "s/\n/ /g")
-    - bash yolov5_ros/weights/download.sh > /dev/null
+    - bash yolov5_ros/weights/download.sh
     - pytest ./
