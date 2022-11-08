@@ -19,7 +19,7 @@
 #   Description
 #
 # --------------------------------------------------------------------------------------------------------------------->
-This is a ROS wrapper of [YOLO V5](https://github.com/ultralytics/yolov5) for Object Detection from Depth image.
+This is a ROS wrapper of [YOLO V5](https://github.com/ultralytics/yolov5) for Object Detection from compressed image.
 
 ![Input Image](docs/output.gif)
 
