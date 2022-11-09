@@ -12,7 +12,7 @@ import rospy
 import torch
 from actionlib import SimpleActionServer
 from cv_bridge import CvBridge
-from numpy._typing import NDArray
+from numpy.typing import NDArray
 from rospy import Publisher, Service, Subscriber
 from sensor_msgs.msg import CompressedImage
 from submodules.yolov5.models.yolo import Model

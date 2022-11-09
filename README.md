@@ -30,7 +30,9 @@ This is a ROS wrapper of [YOLO V5](https://github.com/ultralytics/yolov5) for Ob
 # --------------------------------------------------------------------------------------------------------------------->
 ## Table of Contents
   * [Requirement](#requirement)
+  * [Dependencies](#dependencies)
   * [Getting Started](#getting-started)
+  * [Weights](#weights)
   * [Example](#example)
   * [ROS API](#ros-api)
   * [Contributing](#contributing)
@@ -61,6 +63,22 @@ Tag: `v6.2`
 Commit: `d3ea0df8b9f923685ce5f2555c303b8eddbf83fd`  
 Original README.md: https://github.com/ultralytics/yolov5/blob/v6.2/README.md  
 Original LICENSE: https://github.com/ultralytics/yolov5/blob/v6.2/LICENSE  
+
+<!----------------------------------------------------------------------------------------------------------------------
+#
+#   Weights
+#
+# --------------------------------------------------------------------------------------------------------------------->
+## Getting Started
+```shell
+git clone --recursive https://gitlab.com/nenecchi-ws/ros/packages/yolov5-ros
+```
+
+```shell
+cd yolov5-ros
+pip install -r requirements.txt
+```
+
 
 <!----------------------------------------------------------------------------------------------------------------------
 #
